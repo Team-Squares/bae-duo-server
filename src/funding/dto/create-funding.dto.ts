@@ -1,8 +1,9 @@
 export class CreateFundingDto {
-  funding_stater: string;
-  funding_brand: string;
-  funding_total_price: '0';
-  funding_price_ing: Int16Array;
-  funding_deadtime: Date;
-  funding_min_member: Int16Array;
+  starter: string;
+  brand: string;
+  total_price: 0;
+  cur_price: number;
+  deadline: Date;
+  min_member: number;
+  status: 0;
 }

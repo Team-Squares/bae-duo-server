@@ -1,17 +1,18 @@
 export interface Funding {
   id: string;
-  funding_stater: string;
-  funding_brand: string;
-  funding_total_price: string;
-  funding_price_ing: Int16Array;
-  funding_deadtime: Date;
-  funding_min_member: Int16Array;
-  funding_status: FundingStatus;
-  created_at: string;
-  updated_at: string;
+  starter: string;
+  brand: string;
+  total_price: number;
+  cur_price: number;
+  deadline: Date;
+  min_member: number;
+  cur_member: number;
+  status: number;
+  created_At?: Date;
+  updated_At?: Date;
 }
 
-export enum FundingStatus {
-  PUBLIC = 'PUBLIC',
-  PRIVATE = 'PRIVATE',
-}
+// export enum FundingStatus {
+//   PUBLIC = 'PUBLIC',
+//   PRIVATE = 'PRIVATE',
+// }

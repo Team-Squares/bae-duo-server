@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Funding, FundingStatus } from './funding.model';
+import { Funding } from './funding.model';
 import { CreateFundingDto } from './dto/create-funding.dto';
 import { v1 as uuid } from 'uuid';
 
@@ -13,24 +13,24 @@ export class FundingService {
 
   createFunding(createFundingDto: CreateFundingDto) {
     const {
-      funding_brand,
-      funding_deadtime,
-      funding_min_member,
-      funding_price_ing,
-      funding_stater,
-      funding_total_price,
+      brand,
+      deadline,
+      min_member,
+      cur_price,
+      starter,
+      total_price,
+      status,
     } = createFundingDto;
     const funding: Funding = {
       id: uuid(),
-      funding_stater,
-      funding_brand,
-      funding_total_price,
-      funding_price_ing,
-      funding_deadtime,
-      funding_min_member,
-      funding_status: FundingStatus.PUBLIC,
-      created_at: Date(),
-      updated_at: Date(),
+      starter,
+      brand,
+      total_price,
+      cur_price,
+      deadline,
+      min_member,
+      status,
+      cur_member: 0,
     };
     this.funding.push(funding);
     return funding;
