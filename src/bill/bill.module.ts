@@ -20,14 +20,9 @@ import { UploadsService } from 'src/uploads/uploads.service';
 import { Uploads as UploadsEntity } from 'src/uploads/uploads.entity';
 import { UploadsController } from 'src/uploads/uploads.controller';
 
-import { SlackNoticeModule } from 'src/slack/slack.module';
-import { SlackNoticeController } from 'src/slack/slack.controller';
-import { SlackNoticeService } from 'src/slack/slack.service';
-
 @Module({
   imports: [
     AttendantModule,
-    SlackNoticeModule,
     TypeOrmModule.forFeature([
       BillEntity,
       AttendantEntity,
@@ -44,7 +39,6 @@ import { SlackNoticeService } from 'src/slack/slack.service';
     FundingController,
     BrandsController,
     UploadsController,
-    SlackNoticeController,
   ],
   providers: [
     BillService,
@@ -53,7 +47,6 @@ import { SlackNoticeService } from 'src/slack/slack.service';
     FundingService,
     BrandsService,
     UploadsService,
-    SlackNoticeService,
   ],
 })
 export class BillModule {}

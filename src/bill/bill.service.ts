@@ -7,7 +7,6 @@ import { billType, priceInfoType } from './biil.type';
 import { AttendantService } from 'src/attendant/attendant.service';
 import { AttendantType } from 'src/attendant/attendant.type';
 import { FundingService } from 'src/funding/funding.service';
-import { SlackService } from 'nestjs-slack';
 
 @Injectable()
 export class BillService {
@@ -16,7 +15,6 @@ export class BillService {
     private billRepository: Repository<BillEntity>,
     private attendantService: AttendantService,
     private fundingService: FundingService,
-    private slackService: SlackService,
   ) {}
 
   async saveBill(sentData: CreateBillDto): Promise<BillEntity> {
@@ -27,10 +25,7 @@ export class BillService {
 
   async findAllBills(): Promise<billType[]> {
     const bills = await this.billRepository.find();
-    // this.slackService.postMessage({
-    //   text: 'hey~ its slack bot~',
-    //   channel: 'slack-test-2',
-    // });
+
     const billsWithPriceInfos: billType[] = await Promise.all(
       bills.map(async (bill) => {
         const attendants =

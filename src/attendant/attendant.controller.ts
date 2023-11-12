@@ -18,8 +18,6 @@ import { FundingService } from 'src/funding/funding.service';
 import { attendantMenuInfoType } from 'src/attendantMenuInfo/attendantMenuInfo.type';
 import { CreateAttendantMenuInfoDto } from 'src/attendantMenuInfo/attendantMenuInfo.dto';
 import { NotFoundError } from 'rxjs';
-import { SlackNoticeService } from 'src/slack/slack.service';
-import { getFundingReadyMessage } from 'src/slack/slack.functions';
 
 @Controller('attendant')
 export class AttendantController {
@@ -27,7 +25,6 @@ export class AttendantController {
     private attendantService: AttendantService,
     private attendantMenuInfoService: AttendantMenuInfoService,
     private fundingService: FundingService,
-    private slackService: SlackNoticeService,
   ) {}
 
   convertStringToJSON = (string: string) => {
@@ -66,14 +63,6 @@ export class AttendantController {
     );
 
     // 펀딩 완료 조건이 되면 알림 보내기
-    if (
-      fundingAfterUpdate.curPrice >= fundingAfterUpdate.minPrice &&
-      fundingAfterUpdate.curMember >= fundingAfterUpdate.minMember
-    )
-      this.slackService.postMessage({
-        text: getFundingReadyMessage(fundingAfterUpdate),
-        channel: 'slack-test-2',
-      });
 
     const createdMenuInfo =
       await this.attendantMenuInfoService.saveAttendantMenuInfos(menuInfos);
@@ -125,14 +114,6 @@ export class AttendantController {
     );
 
     // 펀딩 완료 조건이 되면 알림 보내기
-    if (
-      fundingAfterUpdate.curPrice >= fundingAfterUpdate.minPrice &&
-      fundingAfterUpdate.curMember >= fundingAfterUpdate.minMember
-    )
-      this.slackService.postMessage({
-        text: getFundingReadyMessage(fundingAfterUpdate),
-        channel: 'slack-test-2',
-      });
 
     return this.attendantService.updateAttendant(newAttendantData, menuInfos);
   }

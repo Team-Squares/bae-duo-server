@@ -7,16 +7,10 @@ import { Brands } from 'src/brands/brands.entity';
 import { Uploads } from 'src/uploads/uploads.entity';
 import { UploadsController } from 'src/uploads/uploads.controller';
 import { UploadsService } from 'src/uploads/uploads.service';
-import { SlackNoticeModule } from 'src/slack/slack.module';
-import { SlackNoticeController } from 'src/slack/slack.controller';
-import { SlackNoticeService } from 'src/slack/slack.service';
 
 @Module({
-  imports: [
-    SlackNoticeModule,
-    TypeOrmModule.forFeature([Funding, Brands, Uploads]),
-  ],
-  controllers: [FundingController, UploadsController, SlackNoticeController],
-  providers: [FundingService, UploadsService, SlackNoticeService],
+  imports: [TypeOrmModule.forFeature([Funding, Brands, Uploads])],
+  controllers: [FundingController, UploadsController],
+  providers: [FundingService, UploadsService],
 })
 export class FundingModule {}

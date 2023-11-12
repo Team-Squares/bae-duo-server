@@ -7,8 +7,6 @@ import { CreateFundingDto } from './dto/create-funding.dto';
 import { SearchFundingDto } from './dto/search-funding.dto';
 import { UpdateFundingDto } from './dto/update-funding.dto';
 import { UploadsService } from 'src/uploads/uploads.service';
-import { SlackNoticeService } from 'src/slack/slack.service';
-import { getCreateFundingMessage } from 'src/slack/slack.functions';
 
 @Injectable()
 export class FundingService {
@@ -18,7 +16,6 @@ export class FundingService {
     @InjectRepository(Brands)
     private brandRepository: Repository<Brands>,
     private uploadsService: UploadsService,
-    private slackService: SlackNoticeService,
   ) {}
 
   // 1. Create
@@ -53,12 +50,6 @@ export class FundingService {
         );
       }
     }
-
-    // 펀딩이 만들어졌다고 slack에 동네방네 소문내기
-    this.slackService.postMessage({
-      text: getCreateFundingMessage(createdFunding),
-      channel: 'slack-test-2',
-    });
 
     return createdFunding;
   }
